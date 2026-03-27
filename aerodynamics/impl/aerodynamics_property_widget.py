@@ -1,6 +1,7 @@
 import re
 from omni.kit.property.usd.usd_property_widget import UsdPropertiesWidget, UsdPropertyUiEntry
 
+
 class AerodynamicsPropertyWidget(UsdPropertiesWidget):
     def __init__(self, title: str, attribute_namespace_filter: list, collapsed: bool = False):
         super().__init__(title, collapsed, multi_edit=False)
@@ -28,12 +29,12 @@ class AerodynamicsPropertyWidget(UsdPropertiesWidget):
                 continue
             if not prim.GetAttribute("omni:scripting:scripts").Get():
                 continue
-                
+
             props = self._get_prim_properties(prim)
             for prop in props:
                 prop_name = prop.GetName()
                 parts = prop_name.split(":")
-                
+
                 if not parts[0] in self._attribute_namespace_filter:
                     continue
                 if len(parts) > 1 and parts[1] != "aerodynamics":
@@ -43,7 +44,7 @@ class AerodynamicsPropertyWidget(UsdPropertiesWidget):
                 metadata_with_default = prop.GetAllMetadata()
                 metadata_with_default.update({"default": prop.Get()})
                 prop_type = prop.GetPropertyType() if hasattr(prop, "GetPropertyType") else type(prop)
-                
+
                 ui_entry = UsdPropertyUiEntry(prop_name, display_group, metadata_with_default, prop_type)
                 self._props_to_build.append(ui_entry)
 
@@ -76,7 +77,7 @@ class AerodynamicsPropertyWidget(UsdPropertiesWidget):
                 group_title = "Other"
                 display_name = prop_name
                 new_display_group = f"{prim_path}:{group_title}" if prim_path else group_title
-                
+
             prop.override_display_group(new_display_group)
             prop.override_display_name(display_name)
 
