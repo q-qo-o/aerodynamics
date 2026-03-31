@@ -26,4 +26,4 @@ An Nvidia Omniverse / Isaac Sim extension that provides high-fidelity aerodynami
 
 ## License
 
-This project is licensed under the MIT License - see the [LICENSE](../LICENSE) file for details.
+This project is licensed under the MIT License - see the [LICENSE](LICENSE) file for details.
